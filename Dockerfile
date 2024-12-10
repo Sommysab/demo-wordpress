@@ -1,10 +1,26 @@
-FROM node:lts-alpine as builder
-WORKDIR '/app'
-COPY package.json .
-RUN npm install
-COPY . .
-RUN npm run build
+# Use the official WordPress image as the base
+FROM wordpress:latest
 
-FROM nginx
+# Set environment variables for the database
+ENV WORDPRESS_DB_HOST=database-1.cdy0s02sqih2.eu-west-2.rds.amazonaws.com
+ENV WORDPRESS_DB_USER=admin
+ENV WORDPRESS_DB_PASSWORD=admin123
+ENV WORDPRESS_DB_NAME=demo01
+ENV WORDPRESS_DEBUG=true
+
+# Expose port 80 for the web server
 EXPOSE 80
-COPY --from=builder /app/build /usr/share/nginx/html
+
+# Start the WordPress service
+CMD ["apache2-foreground"]
+
+# FROM node:lts-alpine as builder
+# WORKDIR '/app'
+# COPY package.json .
+# RUN npm install
+# COPY . .
+# RUN npm run build
+
+# FROM nginx
+# EXPOSE 80
+# COPY --from=builder /app/build /usr/share/nginx/html
