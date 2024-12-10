@@ -36,6 +36,6 @@ jobs:
           application_name: demo-wordpress2
           environment_name: demo-wordpress2-env
           existing_bucket_name: elasticbeanstalk-eu-west-2-992382752962
-          region: eu-east-2
+          region: eu-west-2
           version_label: ${{ github.sha }}
           deployment_package: deploy.zip
