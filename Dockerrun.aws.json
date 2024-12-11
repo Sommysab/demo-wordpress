@@ -1,41 +1,18 @@
 {
-  "AWSEBDockerrunVersion": "2",
-  "containerDefinitions": [
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "wordpress:latest",
+    "Update": "true"
+  },
+  "Ports": [
     {
-      "name": "wordpress",
-      "image": "wordpress:latest",
-      "essential": true,
-      "memory": 512,
-      "portMappings": [
-        {
-          "hostPort": 80,
-          "containerPort": 80
-        }
-      ],
-      "environment": [
-        { "name": "WORDPRESS_DB_HOST", "value": "db" },
-        { "name": "WORDPRESS_DB_USER", "value": "admin" },
-        { "name": "WORDPRESS_DB_PASSWORD", "value": "admin123" },
-        { "name": "WORDPRESS_DB_NAME", "value": "demo01" }
-      ]
-    },
+      "ContainerPort": 80,
+      "HostPort": 80
+    }
+  ],
+  "ContainerCommands": [
     {
-      "name": "db",
-      "image": "biarms/mysql:5.7",
-      "essential": true,
-      "memory": 512,
-      "portMappings": [
-        {
-          "hostPort": 3306,
-          "containerPort": 3306
-        }
-      ],
-      "environment": [
-        { "name": "MYSQL_ROOT_PASSWORD", "value": "admin123" },
-        { "name": "MYSQL_DATABASE", "value": "demo01" },
-        { "name": "MYSQL_USER", "value": "admin" },
-        { "name": "MYSQL_PASSWORD", "value": "admin123" }
-      ]
+      "Command": "docker run -d -p 80:80 --name my-wordpress-container wordpress"
     }
   ]
 }
