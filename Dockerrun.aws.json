@@ -10,6 +10,12 @@
       "HostPort": 80
     }
   ],
+  "Volumes": [
+    {
+      "HostDirectory": "./plugin-x",
+      "ContainerDirectory": "/var/www/html/wp-content/plugins/plugin-x"
+    }
+  ],
   "ContainerCommands": [
     {
       "Command": "docker run -d -p 80:80 --name my-wordpress-container wordpress"
