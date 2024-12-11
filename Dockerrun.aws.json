@@ -12,12 +12,6 @@
           "containerPort": 80
         }
       ],
-      "mountPoints": [
-        {
-          "sourceVolume": "wordpress-data",
-          "containerPath": "/var/www/html"
-        }
-      ],
       "environment": [
         { "name": "WORDPRESS_DB_HOST", "value": "db" },
         { "name": "WORDPRESS_DB_USER", "value": "admin" },
@@ -36,32 +30,12 @@
           "containerPort": 3306
         }
       ],
-      "mountPoints": [
-        {
-          "sourceVolume": "mysql-data",
-          "containerPath": "/var/lib/mysql"
-        }
-      ],
       "environment": [
         { "name": "MYSQL_ROOT_PASSWORD", "value": "admin123" },
         { "name": "MYSQL_DATABASE", "value": "demo01" },
         { "name": "MYSQL_USER", "value": "admin" },
         { "name": "MYSQL_PASSWORD", "value": "admin123" }
       ]
-    }
-  ],
-  "volumes": [
-    {
-      "name": "wordpress-data",
-      "host": {
-        "sourcePath": "/var/ebdata/wordpress"
-      }
-    },
-    {
-      "name": "mysql-data",
-      "host": {
-        "sourcePath": "/var/ebdata/mysql"
-      }
     }
   ]
 }
