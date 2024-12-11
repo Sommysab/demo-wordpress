@@ -1,0 +1,67 @@
+{
+  "AWSEBDockerrunVersion": "2",
+  "containerDefinitions": [
+    {
+      "name": "wordpress",
+      "image": "wordpress:latest",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "wordpress-data",
+          "containerPath": "/var/www/html"
+        }
+      ],
+      "environment": [
+        { "name": "WORDPRESS_DB_HOST", "value": "db" },
+        { "name": "WORDPRESS_DB_USER", "value": "admin" },
+        { "name": "WORDPRESS_DB_PASSWORD", "value": "admin123" },
+        { "name": "WORDPRESS_DB_NAME", "value": "demo01" }
+      ]
+    },
+    {
+      "name": "db",
+      "image": "biarms/mysql:5.7",
+      "essential": true,
+      "memory": 512,
+      "portMappings": [
+        {
+          "hostPort": 3306,
+          "containerPort": 3306
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "mysql-data",
+          "containerPath": "/var/lib/mysql"
+        }
+      ],
+      "environment": [
+        { "name": "MYSQL_ROOT_PASSWORD", "value": "admin123" },
+        { "name": "MYSQL_DATABASE", "value": "demo01" },
+        { "name": "MYSQL_USER", "value": "admin" },
+        { "name": "MYSQL_PASSWORD", "value": "admin123" }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "name": "wordpress-data",
+      "host": {
+        "sourcePath": "/var/ebdata/wordpress"
+      }
+    },
+    {
+      "name": "mysql-data",
+      "host": {
+        "sourcePath": "/var/ebdata/mysql"
+      }
+    }
+  ]
+}
