@@ -36,6 +36,6 @@ jobs:
           application_name: elbs-demo
           environment_name: Elbs-demo-env
           existing_bucket_name: elasticbeanstalk-us-east-1-992382752962
-          region: eu-west-2
+          region: us-east-1
           version_label: ${{ github.sha }}
           deployment_package: deploy.zip
